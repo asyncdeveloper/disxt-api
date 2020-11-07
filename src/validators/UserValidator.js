@@ -1,0 +1,15 @@
+import { Roles } from "../models/User";
+import { body } from 'express-validator';
+
+export const userRegistrationRules = () => {
+    return [
+        body('username').trim().notEmpty().isLength({ min: 5, max: 255 }).withMessage('must be at least 5 chars long'),
+        body('password').trim().notEmpty().isLength({ min: 5, max: 255 }).withMessage('must be at least 5 chars long'),
+        body('name').trim().notEmpty().isLength({ min: 3, max: 255 }).withMessage('must be at least 3 chars long'),
+        body('lastname').trim().notEmpty().isLength({ min: 3, max: 255 }).withMessage('must be at least 3 chars long'),
+        body('age').trim().notEmpty().isInt({ min: 1 }).withMessage('must be at least 1'),
+        body('role').trim().notEmpty().custom(value => {
+            return  Roles.some(role => role === value)
+        })
+    ]
+};
