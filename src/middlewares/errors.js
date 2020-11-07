@@ -11,6 +11,6 @@ export default (err, req, res, next) => {
 
     return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
         message: "Something went wrong. It's not your fault and we apologize for this",
-        errors: {}
+        errors: null
     });
 }

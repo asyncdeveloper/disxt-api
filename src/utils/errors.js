@@ -2,7 +2,7 @@ import HttpStatusCode from 'http-status-codes';
 
 export class GeneralError extends Error {
 
-    constructor(message, errors = {}) {
+    constructor(message, errors = null) {
         super();
 
         this.message = message;
