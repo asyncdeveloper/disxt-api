@@ -13,3 +13,10 @@ export const userRegistrationRules = () => {
         })
     ]
 };
+
+export const userLoginRules = () => {
+    return [
+        body('username').trim().notEmpty().withMessage('Username is required'),
+        body('password').trim().notEmpty().isLength({ min: 5, max: 255 }).withMessage('Password is required'),
+    ]
+};
