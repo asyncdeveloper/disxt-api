@@ -18,6 +18,14 @@ export class GeneralError extends Error {
             return HttpStatusCode.NOT_FOUND;
         }
 
+        if (this instanceof Forbidden) {
+            return HttpStatusCode.FORBIDDEN;
+        }
+
+        if (this instanceof UnAuthorized) {
+            return HttpStatusCode.UNAUTHORIZED;
+        }
+
         return HttpStatusCode.INTERNAL_SERVER_ERROR;
     }
 }
@@ -26,3 +34,6 @@ export class BadRequest extends GeneralError { }
 
 export class NotFound extends GeneralError { }
 
+export class Forbidden extends GeneralError { }
+
+export class UnAuthorized extends GeneralError { }
