@@ -30,6 +30,21 @@ class ProductController {
             next(err);
         }
     }
+
+    async create(req, res, next) {
+        try {
+            const { name, price, description } = req.body;
+            const created_by = req.userId;
+            const product = await new Product({ name, price, description, created_by }).save();
+            return res.status(HttpStatusCode.CREATED)
+                .json({
+                    data: product,
+                    message: "Product created successfully."
+                });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export default new ProductController();
