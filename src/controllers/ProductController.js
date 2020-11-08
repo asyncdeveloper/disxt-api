@@ -35,7 +35,9 @@ class ProductController {
         try {
             const { name, price, description } = req.body;
             const created_by = req.userId;
-            const product = await new Product({ name, price, description, created_by }).save();
+            let product = await new Product({ name, price, description, created_by }).save();
+            product = await product.populate('created_by', '_id username').execPopulate();
+
             return res.status(HttpStatusCode.CREATED)
                 .json({
                     data: product,
