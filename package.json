@@ -18,10 +18,10 @@
     "@babel/core": "^7.12.3",
     "@babel/node": "^7.12.6",
     "@babel/preset-env": "^7.12.1",
+    "babel-polyfill": "^6.26.0",
     "nodemon": "^2.0.6"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.12.2",
     "dotenv": "^8.2.0",
@@ -35,6 +35,6 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "dev": "nodemon src/server.js --exec babel-node",
-    "start": "node dist/server.js"
+    "start": "npm run build && node dist/server.js"
   }
 }
