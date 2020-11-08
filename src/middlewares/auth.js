@@ -13,6 +13,7 @@ export const verifyToken = (req, res, next) => {
         const payload = jwt.verify(token, config.JWT_SECRET);
         req.userId = payload.userId;
         req.userRole = payload.role;
+        req.exclude = payload.role === 'admin' ?  {} : { created_by: 0 };
         next();
     } catch (err) {
         throw new UnAuthorized('Invalid token, Access Denied')

@@ -5,7 +5,8 @@ class ProductController {
 
    async all (req, res, next) {
         try {
-            const products = await Product.find({}).populate('created_by', '_id username');
+            const products = await Product.find({}, req.exclude)
+                .populate('created_by', '_id username');
 
             return res.status(HttpStatusCode.OK).json({
                 message: 'Products retrieved successfully.',
@@ -18,9 +19,8 @@ class ProductController {
 
     async show(req, res, next) {
         try {
-            const product = await Product.findOne({
-                _id: req.params.id,
-            }).populate('created_by', '_id username');
+            const product = await Product.findOne({ _id: req.params.id }, req.exclude)
+                .populate('created_by', '_id username');
 
             return res.status(HttpStatusCode.OK).json({
                 message: 'Product retrieved successfully.',
