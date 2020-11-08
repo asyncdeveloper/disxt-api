@@ -54,6 +54,25 @@ class ProductController {
             next(err);
         }
     }
+
+    async update(req, res, next) {
+        try {
+            const { name, price, description } = req.body;
+
+            const product = await Product.findByIdAndUpdate(
+                { _id: req.params.id },
+                { name, price, description },
+                { new: true }
+            ).populate('created_by', '_id username');
+
+            return res.status(HttpStatusCode.OK).json({
+                message: 'Product updated successfully.',
+                data: product
+            });
+        } catch (err) {
+           next(err);
+        }
+    }
 }
 
 export default new ProductController();
