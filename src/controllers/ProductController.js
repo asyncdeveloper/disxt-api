@@ -45,6 +45,15 @@ class ProductController {
             next(err);
         }
     }
+
+    async delete(req, res, next) {
+        try {
+            await Product.findOneAndDelete({ _id: req.params.id });
+            return res.status(HttpStatusCode.NO_CONTENT);
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export default new ProductController();

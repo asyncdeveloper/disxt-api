@@ -10,5 +10,6 @@ const router = Router();
 router.get('/:id', [ verifyToken ] , productShowRules(), validate,  ProductController.show);
 router.get('/', [ verifyToken ], ProductController.all);
 router.post('/', [ verifyToken, isAdmin ], productCreateRules(), validate, ProductController.create);
+router.delete('/:id', [ verifyToken, isAdmin ], productShowRules(), validate, ProductController.delete);
 
 export default router;
